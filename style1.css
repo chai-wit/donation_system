@@ -1,9 +1,65 @@
-body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-th { background: #eee; cursor: pointer; }
-.d-none { display: none; }
-.pagination { margin-top: 10px; text-align: center; }
-.pagination-btn { margin: 0 2px; padding: 4px 8px; cursor: pointer; }
-.pagination-btn.active { font-weight: bold; background: #007bff; color: #fff; border-radius: 4px; }
-.sort-icon { font-size: 12px; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 10px;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  cursor: pointer;
+  background-color: #f2f2f2;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.pagination-btn {
+  padding: 5px 10px;
+  border: 1px solid #0d6efd;
+  background-color: white;
+  color: #0d6efd;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pagination-btn:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.pagination-btn.active {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.pagination-ellipsis {
+  padding: 5px 10px;
+  color: #555;
+}
+
+.spinner-border {
+  width: 1rem;
+  height: 1rem;
+  border-width: .2em;
+}
