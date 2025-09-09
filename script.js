@@ -1,6 +1,6 @@
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxJpnhg35l4xVOHq4KfUgpSQNDa6xWlcsZn4GOPlCDjfmtdXWwVxWZ7aKcE6o_6w1s/exec';
 
-const homePage = document.getElementById('homePage');
+const homePage= document.getElementById('homePage');
 const donationFormPage = document.getElementById('donationFormPage');
 const showDonationFormBtn = document.getElementById('showDonationFormBtn');
 const backToHomeBtn = document.getElementById('backToHomeBtn');
