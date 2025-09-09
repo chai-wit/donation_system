@@ -1,62 +1,70 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ระบบบริจาค</title>
-<link rel="stylesheet" href="style1.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบบริจาค</title>
+  <link rel="stylesheet" href="style1.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-<div id="homePage">
+  <!-- หน้า Home -->
+  <div id="homePage">
     <h1>รายการผู้บริจาค</h1>
     <div class="search-container">
-        <select id="searchCategory">
-            <option value="all" selected>ค้นหาทั้งหมด</option>
-            <option value="fullName">ค้นหา: ชื่อ-นามสกุล</option>
-            <option value="occupation">ค้นหา: รุ่น/อาชีพ</option>
-            <option value="amount">ค้นหา: จำนวนเงิน</option>
-            <option value="transferDate">ค้นหา: วันที่โอนเงิน</option>
-        </select>
-        <input type="text" id="searchInput" placeholder="ค้นหาข้อมูลผู้บริจาค...">
+      <select id="searchCategory">
+        <option value="all">ค้นหาทั้งหมด</option>
+        <option value="fullName">ชื่อ-นามสกุล</option>
+        <option value="occupation">รุ่น/อาชีพ</option>
+        <option value="amount">จำนวนเงิน</option>
+        <option value="transferDate">วันที่แจ้งโอนเงิน</option>
+      </select>
+      <input type="text" id="searchInput" placeholder="กรอกคำค้นหา..." />
+      <button id="showDonationFormBtn">เพิ่มผู้บริจาค</button>
     </div>
-    <table class="donors-table">
+
+    <div class="table-responsive">
+      <table class="table">
         <thead>
-            <tr>
-                <th>ลำดับที่</th>
-                <th id="headerFullName" data-sort-key="ชื่อ-นามสกุล">ชื่อ-นามสกุล <span class="sort-icon"></span></th>
-                <th id="headerOccupation" data-sort-key="รุ่น/อาชีพ">รุ่น/อาชีพ <span class="sort-icon"></span></th>
-                <th id="headerAmount" data-sort-key="จำนวนเงิน">จำนวนเงิน <span class="sort-icon"></span></th>
-                <th id="headerTransferDate" data-sort-key="วันที่แจ้งโอนเงิน">วันที่โอนเงิน <span class="sort-icon"></span></th>
-            </tr>
+          <tr>
+            <th>ลำดับ</th>
+            <th id="headerFullName" data-sort-key="ชื่อ-นามสกุล">ชื่อ-นามสกุล <span class="sort-icon"></span></th>
+            <th id="headerOccupation" data-sort-key="รุ่น/อาชีพ">รุ่น/อาชีพ <span class="sort-icon"></span></th>
+            <th id="headerAmount" data-sort-key="จำนวนเงิน">จำนวนเงิน <span class="sort-icon"></span></th>
+            <th id="headerTransferDate" data-sort-key="วันที่แจ้งโอนเงิน">วันที่แจ้งโอนเงิน <span class="sort-icon"></span></th>
+          </tr>
         </thead>
         <tbody id="donorsTableBody">
+          <tr><td colspan="5" class="text-center py-4">กำลังโหลดข้อมูลผู้บริจาค...</td></tr>
         </tbody>
-    </table>
-    <div id="paginationButtons" class="pagination"></div>
-    <button id="showDonationFormBtn">เพิ่มผู้บริจาค</button>
-    <div class="summary">
-        <span>จำนวนผู้บริจาค: <span id="totalDonors">0</span></span>
-        <span>ยอดรวม: <span id="totalAmount">0</span> บาท</span>
+      </table>
     </div>
-</div>
 
-<div id="donationFormPage" class="d-none">
-    <h1>ฟอร์มเพิ่มผู้บริจาค</h1>
-    <form id="donationForm">
-        <label>ชื่อ-นามสกุล: <input type="text" id="fullName" required></label>
-        <label>รุ่น/อาชีพ: <input type="text" id="occupation"></label>
-        <label>เบอร์โทร: <input type="text" id="phoneNumber"></label>
-        <label>จำนวนเงิน: <input type="number" id="amount" required></label>
-        <label>วันที่โอนเงิน: <input type="date" id="donationDate"></label>
-        <label>วันที่แจ้งโอนเงิน: <input type="text" id="transferDate" readonly></label>
-        <label>เวลาแจ้งโอนเงิน: <input type="text" id="transferTime" readonly></label>
-        <label>อัปโหลดสลิป: <input type="file" id="slipImage" accept="image/*" required></label>
-        <button type="submit">บันทึก</button>
-        <button type="button" id="backToHomeBtn">กลับหน้าหลัก</button>
+    <div class="summary">
+      <p>ผู้บริจาคทั้งหมด: <span id="totalDonors">0</span></p>
+      <p>จำนวนเงินรวม: <span id="totalAmount">0</span> บาท</p>
+    </div>
+
+    <div id="paginationButtons" class="pagination"></div>
+  </div>
+
+  <!-- หน้า Form -->
+  <div id="donationFormPage" class="d-none">
+    <h2>เพิ่มผู้บริจาค</h2>
+    <form id="donationForm" novalidate>
+      <input id="fullName" required placeholder="ชื่อ-นามสกุล">
+      <input id="occupation" placeholder="รุ่น/อาชีพ">
+      <input id="phoneNumber" placeholder="เบอร์โทร">
+      <input id="amount" type="number" required placeholder="จำนวนเงิน">
+      <input id="donationDate" type="date" placeholder="วันที่โอนเงิน">
+      <input id="slipImage" type="file" accept="image/*" required>
+      <input id="transferDate" readonly>
+      <input id="transferTime" readonly>
+      <button type="submit">บันทึก</button>
+      <button type="button" id="backToHomeBtn">กลับหน้าหลัก</button>
     </form>
-</div>
+  </div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
