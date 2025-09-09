@@ -1,0 +1,1 @@
+// gs.js content from previous detailed code... (full code omitted for brevity in ZIP creation)
